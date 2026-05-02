@@ -22,7 +22,7 @@ wedding-invitation-2/
 │   ├── package.json
 │   └── tsconfig.json
 │
-├── frontend/                     # Next.js 14 (App Router)
+├── frontend/                     # Next.js 15 (App Router)
 │   ├── public/                   # Static assets (images, fonts, etc.)
 │   ├── src/
 │   │   ├── app/
