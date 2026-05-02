@@ -40,3 +40,5 @@ backend/.env
 # typescript
 *.tsbuildinfo
 frontend/next-env.d.ts
+
+/plan/**
