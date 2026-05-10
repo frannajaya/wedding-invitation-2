@@ -4,16 +4,19 @@ interface CardProps {
   title?: string;
   children: React.ReactNode;
   className?: string;
+  eyebrow?: string;
+  pinned?: boolean;
 }
 
 /**
  * Reusable Card component.
  * Usage: <Card title="Our Story">Content here</Card>
  */
-export default function Card({ title, children, className = '' }: CardProps) {
+export default function Card({ title, children, className = '', eyebrow, pinned = false }: CardProps) {
   return (
-    <div className={`rounded-lg shadow-md bg-white p-6 ${className}`}>
-      {title && <h3 className="text-xl font-semibold mb-4">{title}</h3>}
+    <div className={`paper-card ${pinned ? 'paper-card--pinned' : ''} ${className}`.trim()}>
+      {eyebrow && <p className="paper-card__eyebrow">{eyebrow}</p>}
+      {title && <h3 className="paper-card__title">{title}</h3>}
       {children}
     </div>
   );

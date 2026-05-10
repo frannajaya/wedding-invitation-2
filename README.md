@@ -72,7 +72,22 @@ Available endpoints:
 |--------|-------------|--------------------------|
 | GET    | /health     | Health check             |
 | POST   | /api/rsvp   | Submit a guest RSVP      |
+| PUT    | /api/rsvp   | Update an RSVP by token  |
 | GET    | /api/rsvp   | List all RSVPs (admin)   |
+| POST   | /api/wishes | Submit a guest wish      |
+| GET    | /api/wishes | List all wishes (admin)  |
+
+The backend stores data in a local SQLite file at `backend/data/wedding-invitation.sqlite` by default.
+Override the location with `WEDDING_DB_PATH` if needed.
+
+Guest count validation is controlled by the environment:
+
+```env
+RSVP_MIN_GUESTS=1
+RSVP_MAX_GUESTS=6
+```
+
+The RSVP form uses an `editToken` returned by `POST /api/rsvp` so a guest can update their submission later without an account.
 
 ### Frontend
 
@@ -86,7 +101,12 @@ Create `frontend/.env.local` to point at the backend:
 
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:4000
+NEXT_PUBLIC_RSVP_MAX_GUESTS=6
 ```
+
+The frontend loads Great Vibes for script headings and Cormorant Garamond for body copy, then composes the invitation from these sections:
+
+`Hero` → `CollageBanner` → `Celebration` → `Itinerary` → `FAQ` → `Gallery` → `RSVP` → `Wishes`
 
 ---
 
@@ -94,11 +114,14 @@ NEXT_PUBLIC_API_URL=http://localhost:4000
 
 ```
 page.tsx
- ├── <Hero />        – couple names & wedding date
- ├── <Couple />      – bride & groom introduction
- ├── <Gallery />     – photo gallery (placeholder)
- └── <RSVP />        – guest attendance form
-         └── uses <Button /> (ui primitive)
+ ├── <Hero />            – opening script heading + polaroid
+ ├── <CollageBanner />   – wide banner + note card
+ ├── <Celebration />     – story block + mixed photos
+ ├── <Itinerary />       – schedule + registry note
+ ├── <FAQ />             – two-column question list
+ ├── <Gallery />         – gallery banner + two polaroids
+ ├── <RSVP />            – attendance + guest count form
+ └── <Wishes />          – separate guest message form
 ```
 
 Reusable UI primitives live in `components/ui/` and can be imported by any section or page.  

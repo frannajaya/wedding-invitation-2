@@ -16,6 +16,7 @@ frontend/out/
 frontend/build/
 backend/dist/
 backend/build/
+backend/data/
 
 # misc
 .DS_Store

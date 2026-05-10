@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import rsvpRoutes from './routes/rsvpRoutes';
+import wishRoutes from './routes/wishRoutes';
 import { errorHandler } from './middleware/errorHandler';
 
 dotenv.config();
@@ -15,6 +16,7 @@ app.use(express.json());
 
 // ── Routes ────────────────────────────────────────────────────────────────────
 app.use('/api/rsvp', rsvpRoutes);
+app.use('/api/wishes', wishRoutes);
 
 // ── Health check ──────────────────────────────────────────────────────────────
 app.get('/health', (_req, res) => {
